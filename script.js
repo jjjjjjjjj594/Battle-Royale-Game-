@@ -45,3 +45,12 @@ function gameLoop() {
 }
 
 gameLoop();
+const joystick = document.getElementById("joystick");
+
+joystick.addEventListener("touchstart", () => {
+    console.log("Joystick Touch Start");
+});
+
+joystick.addEventListener("touchend", () => {
+    console.log("Joystick Touch End");
+});
