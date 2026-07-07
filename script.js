@@ -9,6 +9,9 @@ const player = {
   y: 100,
   size: 30,
   speed: 5
+};const world = {
+  width: 3000,
+  height: 3000
 };
 let moveX = 0;
 let moveY = 0;
@@ -31,13 +34,24 @@ function update() {
 player.x += moveX * player.speed;
 player.y += moveY * player.speed;
 function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   ctx.fillStyle = "#5cb85c";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+ctx.fillRect(0, 0, world.width, world.height);
 
-  ctx.fillStyle = "blue";
-  ctx.fillRect(player.x, player.y, player.size, player.size);
+// Grid
+ctx.strokeStyle = "#4aa34a";
+
+for (let x = 0; x < world.width; x += 100) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, world.height);
+    ctx.stroke();
+}
+
+for (let y = 0; y < world.height; y += 100) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(world.width, y);
+    ctx.stroke();
 }
 
 function gameLoop() {
