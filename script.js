@@ -10,7 +10,8 @@ const player = {
   size: 30,
   speed: 5
 };
-
+let moveX = 0;
+let moveY = 0;
 const keys = {};
 
 window.addEventListener("keydown", (e) => {
@@ -27,7 +28,8 @@ function update() {
   if (keys["ArrowLeft"]) player.x -= player.speed;
   if (keys["ArrowRight"]) player.x += player.speed;
 }
-
+player.x += moveX * player.speed;
+player.y += moveY * player.speed;
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -72,8 +74,11 @@ joystick.addEventListener("touchmove", (e) => {
     stick.style.left = (x - 25) + "px";
     stick.style.top = (y - 25) + "px";
 });
-
+moveX = (x - 60) / 35;
+moveY = (y - 60) / 35;
 joystick.addEventListener("touchend", () => {
     stick.style.left = "35px";
     stick.style.top = "35px";
 });
+moveX = 0;
+moveY = 0;
