@@ -54,3 +54,26 @@ joystick.addEventListener("touchstart", () => {
 joystick.addEventListener("touchend", () => {
     console.log("Joystick Touch End");
 });
+const stick = document.getElementById("stick");
+
+joystick.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+
+    const touch = e.touches[0];
+    const rect = joystick.getBoundingClientRect();
+
+    let x = touch.clientX - rect.left;
+    let y = touch.clientY - rect.top;
+
+    // सीमा के अंदर रखो
+    x = Math.max(25, Math.min(95, x));
+    y = Math.max(25, Math.min(95, y));
+
+    stick.style.left = (x - 25) + "px";
+    stick.style.top = (y - 25) + "px";
+});
+
+joystick.addEventListener("touchend", () => {
+    stick.style.left = "35px";
+    stick.style.top = "35px";
+});
